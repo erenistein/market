@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ürün Yerleştirme Tahmini</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            text-align: center;
+        }
+        form {
+            display: inline-block;
+            margin: 0 auto;
+        }
+        select {
+            padding: 5px;
+            margin: 5px;
+        }
+        input[type="submit"] {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Ürün Yerleştirme Tahmini</h1>
+        <form action="/predict" method="post">
+            <label for="product1">Ürün 1:</label>
+            <select id="product1" name="product1" required>
+                <option value="" disabled selected>Seçiniz</option>
+                {% for product in products %}
+                    <option value="{{ product }}">{{ product }}</option>
+                {% endfor %}
+            </select>
+            <br><br>
+            
+            <label for="product2">Ürün 2:</label>
+            <select id="product2" name="product2" required>
+                <option value="" disabled selected>Seçiniz</option>
+                {% for product in products %}
+                    <option value="{{ product }}">{{ product }}</option>
+                {% endfor %}
+            </select>
+            <br><br>
+            
+            <input type="submit" value="Tahmin Et">
+        </form>
+
+        {% if result %}
+            <h2>Sonuç: {{ result }}</h2>
+        {% endif %}
+    </div>
+</body>
+</html>
